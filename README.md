@@ -2,6 +2,15 @@
 
 This is a main repo of the Spark repo.
 
+### SetUp
+
+In order to add each module in your local environment please use: 
+
+```
+git submodule add [submodule-repository-url]
+```
+
+
 ## Submodules
 
 ### Technical Studies
