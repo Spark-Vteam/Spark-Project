@@ -4,7 +4,15 @@ This is a main repo of the Spark repo.
 
 ### SetUp
 
-In order to add each module in your local environment please use: 
+
+To clone all submodules:
+
+```
+git clone --recursive [submodule-repository-url]
+```
+
+
+In order to add a new module in your local environment please use: 
 
 ```
 git submodule add [submodule-repository-url]
