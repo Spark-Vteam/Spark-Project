@@ -1,9 +1,6 @@
 [submodule "Technical-Studies"]
 	path = Technical-Studies
 	url = https://github.com/Spark-Vteam/Technical-Studies.git
-[submodule "Spark-API-backend"]
-	path = Spark-API-backend
-	url = https://github.com/Spark-Vteam/Spark-API-backend.git
 [submodule "Spark-webclient-admin"]
 	path = Spark-webclient-admin
 	url = https://github.com/Spark-Vteam/Spark-webclient-admin.git
@@ -16,3 +13,6 @@
 [submodule "Spark-webapp"]
 	path = Spark-webapp
 	url = https://github.com/Spark-Vteam/Spark-webapp.git
+[submodule "Spark-API-backend"]
+	path = Spark-API-backend
+	url = https://github.com/Spark-Vteam/Spark-API-backend.git
