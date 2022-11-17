@@ -1,0 +1,6 @@
+[submodule "Technical-Studies"]
+	path = Technical-Studies
+	url = https://github.com/Spark-Vteam/Technical-Studies.git
+[submodule "Spark-API-backend"]
+	path = Spark-API-backend
+	url = https://github.com/Spark-Vteam/Spark-API-backend.git
