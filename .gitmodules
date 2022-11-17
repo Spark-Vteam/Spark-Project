@@ -7,3 +7,12 @@
 [submodule "Spark-webclient-admin"]
 	path = Spark-webclient-admin
 	url = https://github.com/Spark-Vteam/Spark-webclient-admin.git
+[submodule "Spark-webclient-customer"]
+	path = Spark-webclient-customer
+	url = https://github.com/Spark-Vteam/Spark-webclient-customer.git
+[submodule "Spark-simulation"]
+	path = Spark-simulation
+	url = https://github.com/Spark-Vteam/Spark-simulation.git
+[submodule "Spark-webapp"]
+	path = Spark-webapp
+	url = https://github.com/Spark-Vteam/Spark-webapp.git
