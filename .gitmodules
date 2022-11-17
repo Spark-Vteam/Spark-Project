@@ -13,12 +13,6 @@
 [submodule "Spark-webapp"]
 	path = Spark-webapp
 	url = https://github.com/Spark-Vteam/Spark-webapp.git
-[submodule "Spark-API-backend"]
-	path = Spark-API-backend
-	url = https://github.com/Spark-Vteam/Spark-API-backend.git
-[submodule "Spark-backedn"]
-	path = Spark-backedn
-	url = https://github.com/Spark-Vteam/Spark-API-backend.git
 [submodule "Spark-backend"]
 	path = Spark-backend
 	url = https://github.com/Spark-Vteam/Spark-API-backend.git
