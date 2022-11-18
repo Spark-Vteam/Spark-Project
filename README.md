@@ -8,7 +8,7 @@ This is a main repo of the Spark repo.
 To clone all submodules:
 
 ```
-git clone --recursive [submodule-repository-url]
+git clone --recursive https://github.com/Spark-Vteam/Spark-Project.git
 ```
 
 
