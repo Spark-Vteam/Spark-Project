@@ -1,25 +1,51 @@
 # SPARK Project
 
-This is a main repo of the Spark repo.
+This is the main repository of the Spark project.
 
 ### SetUp
 
-
 To clone all submodules:
 
-```
-git clone --recursive https://github.com/Spark-Vteam/Spark-Project.git
-```
+    git clone --recursive https://github.com/Spark-Vteam/Spark-Project.git
 
+In order to make a pull requests from all submodules
 
-In order to add a new module in your local environment please use: 
+    git pull --recurse-submodules
 
-```
-git submodule add [submodule-repository-url]
-```
+In order to make a pull requests from a specific submodule.
 
+    cd <directory path>
+    git pull
 
-## Submodules
+In order to add a new module in your local environment please use:
+
+    git submodule add [submodule-repository-url]
+
+### Workflow
+
+Go to the directory where you intend to work. ex. Spark-backend.
+
+1. When ready to push code to the remote repository.
+   Do a normal git add, commit, push from the local directory in order to update that specific remote repository.
+
+    ```
+    git add .
+    git commit -m "Commit text"
+    git push
+    ```
+
+2. Go back to root folder for this repository, the VTeam directory, and do another git add, commit, push in order to update the main repository.
+
+    ```
+    cd ../
+    git add .
+    git commit -m "Commit text"
+    git push
+    ```
+
+# Submodules
+
+List of all the current submodules in this repository.
 
 ### Technical Studies
 
@@ -32,7 +58,6 @@ Github Url:
 ```
 https://github.com/Spark-Vteam/Technical-Studies.git
 ```
-
 
 ### Spark Webclient - Admin
 
@@ -84,7 +109,7 @@ https://github.com/Spark-Vteam/Spark-API-backend.git
 
 ### Spark Simulation
 
-Bike simulation for the Spark project
+Simulation for the Spark project
 
 [Simulation](https://github.com/Spark-Vteam/Spark-simulation.git)
 
