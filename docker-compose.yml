@@ -9,11 +9,14 @@ services:
       dockerfile: Dockerfile
     container_name: mysql-db
     image: spark-backend-db:v1.0
+    environment:
+      LANG: C.UTF-8 
     restart: always
     ports:
       - 3308:3306
     networks:
       dbwebb:
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
   server:
     build:
@@ -23,7 +26,7 @@ services:
     container_name: api-server
     image: spark-backend-server:v1.0
     env_file:
-      - "./Spark-backend/Spark-API-v1/.env"
+      - "./Spark-backend/.env"
     volumes:
       - "./Spark-backend/Spark-API-v1:/app"
     restart: always
@@ -93,3 +96,38 @@ services:
       disable: true
     links:
         - server:api-server
+
+  bike-server:
+    build:
+      context: ./Spark-backend/Spark-bike-server
+      dockerfile: Dockerfile
+    container_name: bike-server
+    # command: python3 ./main.py
+    command: sh -c "sleep 10 ; python3 ./main.py"
+    restart: always
+    ports:
+      - 9898:9898/udp
+    depends_on:
+      - db
+    networks:
+      dbwebb:
+    links:
+      - db:mysql-db
+
+  flask-server:
+    build:
+      context: ./Spark-simulation
+      dockerfile: Dockerfile
+    container_name: flask-server
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - server
+    networks:
+      dbwebb:
+    links:
+      - db:mysql-db
+      - bike-server:bike-server
+      - server:api-server
