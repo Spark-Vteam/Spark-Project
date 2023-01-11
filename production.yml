@@ -1,0 +1,128 @@
+version: "3.7"
+networks:
+  dbwebb:
+
+services:
+  db:
+    build:
+      context: ./Spark-backend/Spark-mysql
+      dockerfile: Dockerfile
+    container_name: mysql-db-production
+    image: spark-backend-db-production:v1.0
+    environment:
+      LANG: C.UTF-8
+    restart: always
+    ports:
+      - 3308:3306
+    networks:
+      dbwebb:
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  server:
+    build:
+      context: ./Spark-backend/Spark-API-v1
+      target: builder
+      dockerfile: Dockerfile
+    container_name: api-server-production
+    image: spark-backend-server-production:v1.0
+    env_file:
+      - "./Spark-backend/.env"
+    restart: always
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    ports:
+      - "4000:4000"
+    networks:
+      dbwebb:
+    links:
+      - db:mysql-db
+
+  webclient-admin:
+    build:
+        context: ./Spark-webclient-admin
+        dockerfile: Dockerfile
+    container_name: webclient-admin-production
+    restart: always
+    environment:
+        - CHOKIDAR_USEPOLLING=true
+    ports:
+        - 3001:3000
+    expose:
+        - '3000'
+    stdin_open: true
+    links:
+        - server:api-server
+
+  webclient-customer:
+    build:
+        context: ./Spark-webclient-customer
+        dockerfile: Dockerfile
+    container_name: webclient-customer-production
+    restart: always
+    environment:
+        - CHOKIDAR_USEPOLLING=true
+    ports:
+        - 3000:3000
+    expose:
+        - '3000'
+    stdin_open: true
+    links:
+        - server:api-server
+
+  react_native:
+    build:
+      context: ./Spark-webapp
+      args:
+        - NODE_ENV=production
+    container_name: webapp-container-production
+    restart: always
+    environment:
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+      - REACT_NATIVE_PACKAGER_HOSTNAME=${IP}
+    tty: true
+    ports:
+      - '19006:19006'
+      - '19001:19001'
+      - '19002:19002'
+      - '19000:19000'
+    healthcheck:
+      disable: true
+    links:
+        - server:api-server
+
+  bike-server:
+    build:
+      context: ./Spark-backend/Spark-bike-server
+      dockerfile: Dockerfile
+    container_name: bike-server-production
+    # command: python3 ./main.py
+    command: sh -c "sleep 10 ; python3 ./main.py"
+    restart: always
+    ports:
+      - 9898:9898/udp
+    depends_on:
+      - db
+    networks:
+      dbwebb:
+    links:
+      - db:mysql-db
+
+  flask-server:
+    build:
+      context: ./Spark-simulation
+      dockerfile: Dockerfile
+    container_name: flask-server-production
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - server
+    networks:
+      dbwebb:
+    links:
+      - db:mysql-db
+      - bike-server:bike-server
+      - server:api-server
