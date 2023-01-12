@@ -102,7 +102,6 @@ services:
       context: ./Spark-backend/Spark-bike-server
       dockerfile: Dockerfile
     container_name: bike-server
-    # command: python3 ./main.py
     command: sh -c "sleep 10 ; python3 ./main.py"
     restart: always
     ports:
